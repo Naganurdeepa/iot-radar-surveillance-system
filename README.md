@@ -74,26 +74,9 @@ flowchart TD
 
 ---
 
-## ⚙️ 4. Software Algorithm / Workflow
 
-mermaid
-flowchart TD
-    A([Start]) --> B[Servo Scanning]
-    B --> C[5 Echo Readings and Averaging]
-    C --> D{Object Within Range?}
-    D -->|No| B
-    D -->|Yes| E[Angle Mapping and Pan-Tilt Movement]
-    E --> F[Confirm Detection Over 2 Scans]
-    F --> G[LED / Buzzer Alert and Camera Capture]
-    G --> H[Cloud Logging and Server Room Monitoring]
-    H --> I[30-Second Controller Review]
-    I --> J[Response Subsystem]
-    J --> K[Relay Module]
-    K --> L[Solenoid Gun Prototype]
-    L --> M[Resume Surveillance]
-    M --> B
 
-    ---
+    
 
 ## ☁️ 5. IoT and Cloud Monitoring
 
