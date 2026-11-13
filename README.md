@@ -1,7 +1,7 @@
 # 📡 AI-Enabled IoT Autonomous Radar Surveillance and Target Tracking System with Cloud Monitoring
 
 <p align="center">
-  <img src="prototype_photo.jpg" alt="Project Prototype" width="750"/>
+  <img src="prototype_photo.jpeg" alt="Project Prototype" width="750"/>
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@ The system integrates ultrasonic object detection, servo-based directional track
 
 When an object is detected, the system determines its approximate direction and positions the camera toward the detected object. The detected-object information is also displayed through a pictorial representation on the cloud monitoring interface.
 
-A 30-second supervised response window is provided, during which an operator can stop the system. The prototype also includes a relay-controlled solenoid-based response subsystem.
+A 30-second supervised response window is provided, during which an operator can stop the system, otherwise the gun will shoot automatically. The prototype also includes a relay-controlled solenoid-based response subsystem.
 
 ## 🎯 2. Project Objectives
 
