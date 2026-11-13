@@ -128,23 +128,7 @@ The response subsystem is documented as a relay-controlled solenoid-based protot
 - **Timed Monitoring:** 30-second supervised review window.
 - **Response Subsystem:** Relay-controlled solenoid-based prototype module.
 
-## 📊 10. Results and Improvements
 
-- Improved ultrasonic distance measurement accuracy.
-- Improved servo angle calibration.
-- Better camera positioning toward detected objects.
-- Reduced false alerts through consecutive-scan confirmation.
-- Integrated surveillance, alert and response subsystems.
-- Established IoT/cloud communication.
-
-## 🚀 11. Future Scope
-
-- AI-based object recognition and classification.
-- Advanced cloud monitoring dashboard.
-- Remote notifications.
-- Improved object tracking.
-- Extended surveillance coverage.
-- Further prototype optimization.
 
 ## 👨‍💻 12. Project Team
 
