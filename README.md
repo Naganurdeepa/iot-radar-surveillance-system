@@ -1,11 +1,11 @@
 # 📡 AI-Enabled IoT Autonomous Radar Surveillance and Target Tracking System with Cloud Monitoring
 
 <p align="center">
-  <img src="prototype_photo.jpeg" alt="Major Project Hardware Prototype" width="750"/>
+  <img src="prototype_photo.jpg" alt="Major Project Prototype" width="750"/>
 </p>
 
 <p align="center">
-  **Autonomous Perimeter Surveillance | Object Detection | Directional Tracking | Cloud Monitoring**
+  <b>Autonomous Perimeter Surveillance | Object Detection | Directional Tracking | Cloud Monitoring</b>
 </p>
 
 <p align="center">
@@ -17,29 +17,39 @@
 
 ---
 
-## 1. 📌 Project Overview
+## 📌 1. Project Overview
 
 The AI-Enabled IoT Autonomous Radar Surveillance and Target Tracking System is an embedded surveillance prototype designed for monitoring border boundaries, restricted zones and sensitive areas where continuous human monitoring may be difficult.
 
-The system uses an HC-SR04 ultrasonic sensor to scan the surrounding area, detect objects and measure their approximate distance. Servo motors determine the direction of the detected object and orient the pan-tilt camera mechanism accordingly.
+The system uses an HC-SR04 ultrasonic sensor to continuously scan the surrounding area, detect objects and measure their approximate distance and direction. Servo motors automatically orient the pan-tilt camera mechanism toward the detected object.
 
-The ESP32-CAM captures visual information and transmits it through Wi-Fi to a remote server-room monitoring interface. The cloud dashboard presents detected-object information through a pictorial representation, allowing an authorized controller to review the event.
+The ESP32-CAM captures visual information and transmits it through Wi-Fi to a remote server-room monitoring interface. The detected-object information is displayed through a pictorial representation on the cloud monitoring dashboard, allowing an authorized controller to review the detected event.
 
-A 30-second supervised review window is incorporated for controller verification. The prototype also includes LED and buzzer alerts and a relay-controlled solenoid-based response subsystem.
+### ⏱️ 30-Second Human Intervention Concept
 
-## 2. 🎯 Project Objectives
+The proposed system incorporates a 30-second countdown after object detection. During this period, the authorized controller in the server room reviews the visual information and can intervene if the detected object is identified as harmless or authorized.
+
+The original project concept includes an automatic response following timeout if no intervention occurs. The prototype includes a relay-controlled solenoid-based response subsystem. Public documentation describes this subsystem at a high level, with potentially harmful actuation kept independently inhibited.
+
+The project integrates Embedded Systems, IoT, ultrasonic sensing, servo-based tracking, camera monitoring and remote surveillance.
+
+---
+
+## 🎯 2. Project Objectives
 
 - Develop an ultrasonic-based object detection mechanism.
 - Measure object distance and determine approximate direction.
-- Implement automatic scanning using servo motors.
-- Orient the camera toward detected objects.
+- Implement automatic directional scanning using servo motors.
+- Orient the camera toward the detected object.
 - Integrate ESP32-CAM for visual monitoring.
 - Generate alerts using LED and buzzer.
 - Transmit detected-object information to a cloud monitoring interface.
 - Provide a 30-second supervised review window.
 - Integrate embedded hardware and IoT communication.
 
-## 3. 🏗️ System Block Diagram
+---
+
+## 🏗️ 3. System Block Diagram
 
 ```mermaid
 flowchart TD
@@ -56,64 +66,83 @@ flowchart TD
     B --> L[Isolated Response Interface]
 ```
 
-## 4. ⚙️ Software Algorithm / Workflow
+---
 
-The following workflow follows the seven stages presented in the Phase II project review.
+## ⚙️ 4. Software Algorithm / Workflow
+
+The following workflow follows the seven stages of the software algorithm presented in the Phase II project review.
 
 ```mermaid
 flowchart TD
-    A([Start]) --> B[Servo Sweeps Step by Step]
+    A([Start]) --> B[Sweep Servo Step by Step]
     B --> C[Take 5 Echo Readings and Average]
     C --> D{Object Within Range?}
     D -->|No| B
     D -->|Yes| E[Map Angle and Move Pan-Tilt]
-    E --> F[Confirm Object Over 2 Scans]
+    E --> F[Confirm Over 2 Scans]
     F --> G[Alert and Capture Visual Information]
-    G --> H[Send Event to Cloud]
-    H --> I[Server Room Visual Review]
-    I --> J[30-Second Supervised Review Window]
-    J --> K[Record Event and Monitoring Status]
-    K --> B
+    G --> H[Log Detection Event to Cloud]
+    H --> I[Send Visual Information to Server Room]
+    I --> J[Display Pictorial Representation]
+    J --> K[Start 30-Second Review Window]
+    K --> L[Controller Reviews Detected Object]
+    L --> M[Record Intervention and Monitoring Status]
+    M --> B
 ```
 
 ### Accuracy Techniques
 
-- Average of five ultrasonic echo readings.
+- Median / average of multiple ultrasonic echo readings.
+- Five echo readings averaged at each scanning angle.
 - Temperature-compensated speed-of-sound calculation.
 - Calibrated angle-to-servo mapping.
 - Consecutive-scan confirmation to reduce false alerts.
 - Servo settling delay for improved positioning.
 
-## 5. ☁️ IoT and Cloud Monitoring
+---
 
-The project uses Wi-Fi communication to transmit detected-object information to a remote monitoring interface.
+## ☁️ 5. IoT and Cloud Monitoring
 
-### Cloud Monitoring Functions
+The project incorporates Wi-Fi-based communication to transfer detected-object information to a remote server-room monitoring interface.
 
-- Receives object detection information.
-- Displays a pictorial representation of detected objects.
+### Cloud Monitoring Features
+
+- Receives detected-object information.
+- Displays detected-object information through pictorial representation.
 - Supports remote visual monitoring.
-- Provides event information to the server-room controller.
-- Supports a 30-second supervised review window.
+- Transfers detection events to the server room.
+- Provides information for authorized controller verification.
+- Incorporates a 30-second monitoring countdown.
+- Supports recording of monitoring and intervention events.
 
-### Monitoring Process
+### Cloud Monitoring Workflow
 
 1. An object is detected by the ultrasonic sensor.
 2. The camera is oriented toward the detected direction.
 3. ESP32-CAM captures visual information.
-4. The information is transmitted to the remote monitoring interface.
-5. The controller reviews the detected event.
-6. The event and monitoring status are recorded.
+4. Information is transmitted through Wi-Fi.
+5. The server-room dashboard displays the detected event.
+6. The authorized controller reviews the visual information.
+7. The 30-second supervised review period is recorded.
 
-## 6. ⏱️ Supervised Monitoring System
+---
+
+## ⏱️ 6. Time-Based Human Intervention
 
 The prototype incorporates a 30-second review window after object detection.
 
-During this period, the authorized controller can review the visual information received in the server room and assess the detected event.
+During this period:
 
-The response subsystem is documented as an isolated relay-controlled solenoid-based prototype interface. Any potentially harmful actuation must remain disabled unless independently authorized by a qualified human operator.
+- The server-room controller receives the visual information.
+- The detected object can be reviewed remotely.
+- The controller can intervene when an object is identified as harmless or authorized.
+- Intervention and timeout events can be recorded.
 
-## 7. 🔧 Hardware Components
+The original concept includes an automatic response after an unanswered timeout. For safe public demonstration and deployment, the response interface should remain independently inhibited unless a qualified human operator explicitly authorizes a safe test action.
+
+---
+
+## 🔧 7. Hardware Components
 
 | Component | Purpose |
 |---|---|
@@ -126,9 +155,13 @@ The response subsystem is documented as an isolated relay-controlled solenoid-ba
 | LED | Visual indication |
 | Buzzer | Audible alert |
 | FTDI232 | ESP32-CAM programming |
-| Power Supply | Power management |
+| Breadboard | Circuit prototyping |
+| Jumper Wires | Hardware connections |
+| 5V Power Supply | Power management |
 
-## 8. 🔌 Circuit / Hardware Design
+---
+
+## 🔌 8. Circuit / Hardware Design
 
 ### ESP32 Pin Configuration
 
@@ -140,9 +173,10 @@ The response subsystem is documented as an isolated relay-controlled solenoid-ba
 | Tilt Servo | GPIO 12 | 5V |
 | LED | GPIO 2 | 3.3V logic |
 | Buzzer | GPIO 4 | 3.3V logic |
-| ESP32-CAM | Separate Wi-Fi link; FTDI232 programming | 5V |
+| Response Unit Driver | GPIO 14 (via transistor) | 5V |
+| ESP32-CAM | Separate Wi-Fi link; programmed through FTDI232 | 5V |
 
-**Hardware Design Notes**
+### Hardware Design Notes
 
 - Common ground for all modules.
 - Servos powered through a separate 5V rail.
@@ -150,7 +184,9 @@ The response subsystem is documented as an isolated relay-controlled solenoid-ba
 - Response interface electrically isolated through a driver stage.
 - Verify all pin numbers and supply values against the final wired prototype.
 
-## 9. 💻 Software and Technologies
+---
+
+## 💻 9. Software and Technologies
 
 - Arduino IDE 2.3.10
 - Embedded C/C++
@@ -158,55 +194,68 @@ The response subsystem is documented as an isolated relay-controlled solenoid-ba
 - Wi-Fi Communication
 - IoT and Cloud Monitoring
 - Hardware Interfacing
+- Sensor Integration
+- Servo Motor Control
 
-## 10. ✨ Key Features
+---
 
-- Autonomous ultrasonic scanning.
-- Object distance measurement.
-- Approximate directional tracking.
-- Servo-based pan-tilt camera positioning.
-- ESP32-CAM visual monitoring.
-- LED and buzzer alerts.
-- Cloud-based pictorial event representation.
-- 30-second supervised review window.
-- Integrated embedded surveillance architecture.
+## ✨ 10. Key Features
 
-## 11. 📊 Results and Analysis
+- **Autonomous Scanning:** Continuous area scanning using ultrasonic sensing.
+- **Object Detection:** Distance measurement using HC-SR04.
+- **Directional Tracking:** Servo-controlled camera positioning.
+- **Visual Monitoring:** ESP32-CAM integration.
+- **Alert System:** LED and buzzer indication.
+- **Cloud Monitoring:** Pictorial representation of detected objects.
+- **Remote Verification:** Server-room visual monitoring.
+- **Timed Monitoring:** 30-second supervised review window.
+- **Response Subsystem:** Relay-controlled solenoid-based prototype interface.
 
-### Improvements Reported in Phase II Review
+---
+
+## 📊 11. Results and Analysis
+
+### Phase I vs Phase II Improvements
 
 | Parameter | Phase I | Phase II |
 |---|---:|---:|
-| Range error | 3.5 cm | 1 cm |
-| Servo angle error | 8° | 2° |
-| Alert delay | 1.2 s | 0.4 s |
+| Range Error | 3.5 cm | 1 cm |
+| Servo Angle Error | 8° | 2° |
+| Alert Delay | 1.2 seconds | 0.4 seconds |
 
-*Values are those reported in the project presentation and should be validated against the team's original test measurements.*
+*Values reported in the Phase II presentation; validate against original test measurements.*
 
 ### Implementation Progress
 
-**Hardware Work**
+**Hardware Work Completed**
+
 - Prototype assembled and wired.
 - Pan-tilt camera mount fitted.
 - Modules powered and tested.
-- Calibration completed.
+- Final calibration completed.
 
-**Software Work**
-- Scanning, detection and tracking logic implemented.
+**Software Work Completed**
+
+- Scanning, detection and tracking logic coded.
 - Filtering and angle calibration added.
 - ESP32-CAM streaming and alerts integrated.
-- IoT/cloud data communication established.
+- IoT/cloud data link established.
 
-## 12. 🚀 Future Scope
+---
+
+## 🚀 12. Future Scope
 
 - AI-based object recognition and classification.
-- Improved cloud monitoring dashboard.
+- Advanced cloud monitoring dashboard.
 - Remote notifications.
-- Enhanced object tracking.
+- Improved object tracking.
 - Larger-area surveillance coverage.
 - Improved prototype optimization.
+- Enhanced monitoring and event management.
 
-## 13. 👨‍💻 Project Team
+---
+
+## 👨‍💻 13. Project Team
 
 | Team Member | USN |
 |---|---|
@@ -225,7 +274,7 @@ Associate Professor
 ---
 
 <p align="center">
-  **Developed as an Engineering Major Project**
+  <b>Developed as an Engineering Major Project</b>
   <br/>
   ❤️ Embedded Systems | IoT | Digital Electronics | Automation
 </p>
