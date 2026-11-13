@@ -77,28 +77,24 @@ flowchart TD
 ## ⚙️ 4. Software Algorithm / Workflow
 
 ```mermaid
-flowchart TD
-    A([Start]) --> B[Sweep Servo Step by Step]
-    B --> C[Take 5 Echo Readings and Average]
+flowchart LR
+    A([Start]) --> B[Servo Scanning]
+    B --> C[5 Echo Readings]
     C --> D{Object Within Range?}
-
     D -->|No| B
-    D -->|Yes| E[Map Angle and Move Pan-Tilt]
-
-    E --> F[Confirm Over 2 Scans]
-    F --> G[Activate Alerts and Capture Visual Information]
-
-    G --> H[Transmit Information to Cloud]
-    H --> I[Server Room Visual Monitoring]
-    I --> J[Start 30-Second Review Window]
-
-    J --> K[Controller Reviews Detected Object]
-    K --> L[Record Controller Intervention or Timeout]
-
-    L --> M[Relay and Solenoid Response Subsystem]
-    M --> N[Independent Safety Inhibition]
-    N --> O[Resume Surveillance]
-    O --> B
+    D -->|Yes| E[Angle Mapping]
+    E --> F[Pan-Tilt Movement]
+    F --> G[Confirm Over 2 Scans]
+    G --> H[LED and Buzzer Alerts]
+    H --> I[ESP32-CAM Capture]
+    I --> J[Wi-Fi Communication]
+    J --> K[Cloud Dashboard]
+    K --> L[Server Room Review]
+    L --> M[30-Second Timer]
+    M --> N[Controller Verification]
+    N --> O[Event Logging]
+    O --> P[Relay Module]
+    P --> Q[Solenoid Response Unit]
 ```
 
 ### Accuracy Techniques
