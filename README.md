@@ -1,7 +1,7 @@
 # 📡 AI-Enabled IoT Autonomous Radar Surveillance and Target Tracking System with Cloud Monitoring
 
 <p align="center">
-  <img src="prototype_photo.jpg" alt="Major Project Prototype" width="750"/>
+  <img src="prototype_photo.jpeg" alt="Major Project Prototype" width="750"/>
 </p>
 
 <p align="center">
@@ -48,23 +48,29 @@ The project integrates Embedded Systems, IoT, ultrasonic sensing, servo-based tr
 - Integrate embedded hardware and IoT communication.
 
 ---
-
 ## 🏗️ 3. System Block Diagram
 
 ```mermaid
 flowchart TD
     A[HC-SR04 Ultrasonic Sensor] --> B[ESP32 Main Controller]
+
     B --> C[Object Detection and Direction Calculation]
     C --> D[Servo Pan-Tilt Mechanism]
     D --> E[ESP32-CAM Visual Monitoring]
+
     E --> F[Wi-Fi Communication]
     F --> G[Remote Server Room]
     G --> H[Cloud Monitoring Dashboard]
     H --> I[Pictorial Object Representation]
     G --> J[Authorized Controller Verification]
+
     B --> K[LED and Buzzer Alerts]
-    B --> L[Isolated Response Interface]
+
+    B --> L[Response Unit Driver]
+    L --> M[Relay Module]
+    M --> N[Solenoid Gun Prototype]
 ```
+
 
 ---
 
