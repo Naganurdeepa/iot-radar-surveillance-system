@@ -76,37 +76,24 @@ flowchart TD
 
 ## ⚙️ 4. Software Algorithm / Workflow
 
-```mermaid
-flowchart LR
+mermaid
+flowchart TD
     A([Start]) --> B[Servo Scanning]
-    B --> C[5 Echo Readings]
+    B --> C[5 Echo Readings and Averaging]
     C --> D{Object Within Range?}
     D -->|No| B
-    D -->|Yes| E[Angle Mapping]
-    E --> F[Pan-Tilt Movement]
-    F --> G[Confirm Over 2 Scans]
-    G --> H[LED and Buzzer Alerts]
-    H --> I[ESP32-CAM Capture]
-    I --> J[Wi-Fi Communication]
-    J --> K[Cloud Dashboard]
-    K --> L[Server Room Review]
-    L --> M[30-Second Timer]
-    M --> N[Controller Verification]
-    N --> O[Event Logging]
-    O --> P[Relay Module]
-    P --> Q[Solenoid Response Unit]
-```
+    D -->|Yes| E[Angle Mapping and Pan-Tilt Movement]
+    E --> F[Confirm Detection Over 2 Scans]
+    F --> G[LED / Buzzer Alert and Camera Capture]
+    G --> H[Cloud Logging and Server Room Monitoring]
+    H --> I[30-Second Controller Review]
+    I --> J[Response Subsystem]
+    J --> K[Relay Module]
+    K --> L[Solenoid Gun Prototype]
+    L --> M[Resume Surveillance]
+    M --> B
 
-### Accuracy Techniques
-
-- Median / average of multiple ultrasonic echo readings.
-- Five echo readings averaged at each scanning angle.
-- Temperature-compensated speed-of-sound calculation.
-- Calibrated angle-to-servo mapping.
-- Consecutive-scan confirmation to reduce false alerts.
-- Servo settling delay for improved positioning.
-
----
+    ---
 
 ## ☁️ 5. IoT and Cloud Monitoring
 
