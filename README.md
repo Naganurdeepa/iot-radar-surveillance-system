@@ -76,24 +76,29 @@ flowchart TD
 
 ## ⚙️ 4. Software Algorithm / Workflow
 
-The following workflow follows the seven stages of the software algorithm presented in the Phase II project review.
-
 ```mermaid
 flowchart TD
     A([Start]) --> B[Sweep Servo Step by Step]
     B --> C[Take 5 Echo Readings and Average]
     C --> D{Object Within Range?}
+
     D -->|No| B
     D -->|Yes| E[Map Angle and Move Pan-Tilt]
+
     E --> F[Confirm Over 2 Scans]
-    F --> G[Alert and Capture Visual Information]
-    G --> H[Log Detection Event to Cloud]
-    H --> I[Send Visual Information to Server Room]
-    I --> J[Display Pictorial Representation]
-    J --> K[Start 30-Second Review Window]
-    K --> L[Controller Reviews Detected Object]
-    L --> M[Record Intervention and Monitoring Status]
-    M --> B
+    F --> G[Activate Alerts and Capture Visual Information]
+
+    G --> H[Transmit Information to Cloud]
+    H --> I[Server Room Visual Monitoring]
+    I --> J[Start 30-Second Review Window]
+
+    J --> K[Controller Reviews Detected Object]
+    K --> L[Record Controller Intervention or Timeout]
+
+    L --> M[Relay and Solenoid Response Subsystem]
+    M --> N[Independent Safety Inhibition]
+    N --> O[Resume Surveillance]
+    O --> B
 ```
 
 ### Accuracy Techniques
