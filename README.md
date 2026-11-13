@@ -102,9 +102,7 @@ flowchart TD
 - Two-scan confirmation to reduce false alerts.
 ```
 
-**Important:** This documents the relay and solenoid hardware without specifying an automatic firing sequence. Keep any potentially harmful actuation independently inhibited.
 
-**GitHub tip:** Keep `flowchart TD` rather than `flowchart LR` so the workflow appears vertically and occupies less horizontal space.
 
     
 
