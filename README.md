@@ -74,7 +74,37 @@ flowchart TD
 
 ---
 
+## ⚙️ 4. Software Algorithm / Workflow
 
+```mermaid
+flowchart TD
+    A([Start]) --> B[Servo Scanning Step by Step]
+    B --> C[Take 5 Ultrasonic Readings and Calculate Average]
+    C --> D{Object Within Range?}
+    D -->|No| B
+    D -->|Yes| E[Map Angle and Move Pan-Tilt]
+    E --> F[Confirm Detection Over 2 Scans]
+    F --> G[Activate Alerts and Capture Image]
+    G --> H[Transmit Data to Cloud]
+    H --> I[Server Room Visual Monitoring]
+    I --> J[30-Second Controller Review]
+    J --> K[Relay-Controlled Response Subsystem]
+    K --> L[Solenoid Gun Prototype]
+    L --> M[Resume Surveillance]
+    M --> B
+```
+
+### Accuracy Techniques
+
+- Average of five ultrasonic readings.
+- Temperature-compensated distance measurement.
+- Calibrated angle-to-servo mapping.
+- Two-scan confirmation to reduce false alerts.
+```
+
+**Important:** This documents the relay and solenoid hardware without specifying an automatic firing sequence. Keep any potentially harmful actuation independently inhibited.
+
+**GitHub tip:** Keep `flowchart TD` rather than `flowchart LR` so the workflow appears vertically and occupies less horizontal space.
 
     
 
